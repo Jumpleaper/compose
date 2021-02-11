@@ -11,14 +11,15 @@ services:
   prod:
     depends_on:
       - stage
-    image: "tomcat:10.0.0-jdk8-corretto"
+    image: "davidcaste/alpine-tomcat:latest"
     volumes:
       -
         source: app
-        target: /usr/local/tomcat/webapps
+        target: /opt/tomcat/webapps
         type: volume
     ports:
       - "8080:8080"
+    command: /opt/tomcat/bin/catalina.sh run
 version: '3.3'
 volumes:
   app:
