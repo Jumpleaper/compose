@@ -1,0 +1,24 @@
+---
+services:
+  stage:
+    build:
+      context: "."
+    volumes:
+      -
+        source: app
+        target: /app
+        type: volume
+  prod:
+    depends_on:
+      - stage
+    image: "tomcat:10.0.0-jdk8-corretto"
+    volumes:
+      -
+        source: app
+        target: /usr/local/tomcat/webapps
+        type: volume
+    ports:
+      - "8080:8080"
+version: '3.3'
+volumes:
+  app:
